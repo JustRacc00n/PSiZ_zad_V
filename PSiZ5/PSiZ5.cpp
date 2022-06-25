@@ -92,6 +92,55 @@ void Informacje(const char* plik)
 void Negatyw(const char* plik)
 {
 
+    FILE* test = fopen("test.bmp", "rb");
+    FILE* neg = fopen("negatyw.bmp", "wb");
+
+    if (neg == nullptr)
+    {
+        cout << endl << "Nie udalo sie otworzyc pliku!" << endl;
+    }
+    else
+    {
+        cout << endl << "Tworze negatyw." << endl;
+
+        fseek(neg, 0, SEEK_SET);
+        fwrite(&Plik.Type, sizeof(Plik.Type), 1, neg);
+        fwrite(&Plik.Size, sizeof(Plik.Size), 1, neg);
+        fwrite(&Plik.Reserved1, sizeof(Plik.Reserved1), 1, neg);
+        fwrite(&Plik.Reserved2, sizeof(Plik.Reserved2), 1, neg);
+        fwrite(&Plik.OffBits, sizeof(Plik.OffBits), 1, neg);
+
+
+        fseek(neg, 14, SEEK_SET);
+        fwrite(&Obraz.headerSize, sizeof(Obraz.headerSize), 1, neg);
+        fwrite(&Obraz.width, sizeof(Obraz.width), 1, neg);
+        fwrite(&Obraz.height, sizeof(Obraz.height), 1, neg);
+        fwrite(&Obraz.planes, sizeof(Obraz.planes), 1, neg);
+        fwrite(&Obraz.bitPerPixel, sizeof(Obraz.bitPerPixel), 1, neg);
+        fwrite(&Obraz.compresion, sizeof(Obraz.compresion), 1, neg);
+        fwrite(&Obraz.imageSize, sizeof(Obraz.imageSize), 1, neg);
+        fwrite(&Obraz.xPelsPerMeter, sizeof(Obraz.xPelsPerMeter), 1, neg);
+        fwrite(&Obraz.yPelsPerMeter, sizeof(Obraz.yPelsPerMeter), 1, neg);
+        fwrite(&Obraz.colorUsed, sizeof(Obraz.colorUsed), 1, neg);
+        fwrite(&Obraz.colorImportant, sizeof(Obraz.colorImportant), 1, neg);
+
+
+        fseek(neg, sizeof(Plik.OffBits), SEEK_SET);
+
+        int Obraz;
+        for (int i = Plik.OffBits; i < Plik.Size; i++)
+        {
+            fseek(test, i, SEEK_SET);
+            fseek(neg, i, SEEK_SET);
+            fread(&Obraz, 3, 1, test);
+            Obraz = INT_MAX - Obraz;
+            fwrite(&Obraz, 3, 1, neg);
+        }
+
+        cout << endl;
+        fclose(test);
+        fclose(neg);
+    }
 }
 
 int main(int arc, char* argv[]) 
