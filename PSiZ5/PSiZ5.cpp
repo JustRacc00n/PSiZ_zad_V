@@ -145,6 +145,19 @@ void Negatyw(const char* plik)
 
 int main(int arc, char* argv[]) 
 {
- 
+    const char* plik;
+
+    if (argv[1] == nullptr)
+    {
+        plik = "test.bmp";
+    }
+    else
+    {
+        plik = argv[1];
+    }
+
+    Informacje(plik);
+    //Negatyw(plik);
+
     return 0;
 }
