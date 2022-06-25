@@ -36,7 +36,7 @@ struct KoloryRGB {
 
 void Informacje(const char* plik)
 {
-    FILE* test = fopen("test.bmp", "rb");
+    FILE* test = fopen(plik, "rb");
 
     if (test == nullptr)
     {
@@ -71,12 +71,12 @@ void Informacje(const char* plik)
             << "Rozmiar pliku: " << Plik.Size << " bajtow" << endl
             << "Zarezerwowane 1: " << Plik.Reserved1 << endl
             << "Zarezerwowane 2: " << Plik.Reserved2 << endl
-            << "Offset (poczatkowy adres bitow w tablicy pikseli): " << Plik.OffBits << endl << endl;
+            << "Pozycja danych obrazkowych: " << Plik.OffBits << endl << endl;
 
         cout << "Wielkosc naglowka informacyjnego: " << Obraz.headerSize << endl
             << "Szerokosc obrazu: " << Obraz.width << " pikseli" << endl
             << "Wysokosc obrazu: " << Obraz.height << " pikseli" << endl
-            << "Liczba warstw kolorow: " << Obraz.planes << endl
+            << "Liczba platow: " << Obraz.planes << endl
             << "Liczba bitow na piksel: " << Obraz.bitPerPixel << endl
             << "Algorytm kompresji: " << Obraz.compresion << endl
             << "Rozmiar samego rysunku: " << Obraz.imageSize << endl
@@ -92,7 +92,7 @@ void Informacje(const char* plik)
 void Negatyw(const char* plik)
 {
 
-    FILE* test = fopen("test.bmp", "rb");
+    FILE* test = fopen(plik, "rb");
     FILE* neg = fopen("negatyw.bmp", "wb");
 
     if (neg == nullptr)
