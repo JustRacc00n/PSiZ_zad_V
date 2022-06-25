@@ -34,7 +34,7 @@ struct KoloryRGB {
     char B;
 } Rgb;
 
-void Informacje(const char* plik)
+void Informacje(const char* plik) //funkcja zczytujaca metadane i wypisujaca informacje o obrazie
 {
     FILE* test = fopen(plik, "rb");
 
@@ -89,7 +89,7 @@ void Informacje(const char* plik)
     }
 }
 
-void Negatyw(const char* plik)
+void Negatyw(const char* plik) //funkcja tworzaca negatyw obrazu
 {
 
     FILE* test = fopen(plik, "rb");
@@ -147,17 +147,13 @@ int main(int arc, char* argv[])
 {
     const char* plik;
 
-    if (argv[1] == nullptr)
-    {
-        plik = "test.bmp";
-    }
+    if (argv[1] == nullptr) //sprawdzenie czy sciezka do pliku zostala podana jako argument przy odpaleniu programu
+        plik = "test.bmp"; //ustawienie na domyslna sciezke w razie braku danych
     else
-    {
         plik = argv[1];
-    }
 
-    Informacje(plik);
-    Negatyw(plik);
+    Informacje(plik); //wypisanie informacji
+    Negatyw(plik); //utworzenie negatywu
 
     return 0;
 }
