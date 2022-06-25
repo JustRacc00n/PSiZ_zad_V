@@ -157,7 +157,7 @@ int main(int arc, char* argv[])
     }
 
     Informacje(plik);
-    //Negatyw(plik);
+    Negatyw(plik);
 
     return 0;
 }
