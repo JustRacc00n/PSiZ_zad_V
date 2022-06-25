@@ -143,7 +143,7 @@ void Negatyw(const char* plik) //funkcja tworzaca negatyw obrazu
     }
 }
 
-int main(int arc, char* argv[]) 
+int main(int argc, char* argv[]) 
 {
     const char* plik;
 
